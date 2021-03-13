@@ -1,7 +1,6 @@
 Hola, mundo!
 
-<<<<<<< HEAD
 Здесь был Петя
-=======
 Здесь был Вася
->>>>>>> vasya
+
+lucky was here
