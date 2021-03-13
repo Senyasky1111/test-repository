@@ -1,5 +1,12 @@
 Hola, mundo!
 
+<<<<<<< HEAD
 master was here
 Здесь был Петя
 Здесь был Вася
+=======
+Здесь был Петя
+Здесь был Вася
+
+lucky was here
+>>>>>>> luck
