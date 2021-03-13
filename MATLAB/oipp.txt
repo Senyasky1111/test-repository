@@ -1,0 +1,72 @@
+spectra = importdata('spectra.csv');
+lambdaStart = importdata('lambda_start.csv');
+lambdaDelta = importdata('lambda_delta.csv');
+starNames = importdata('star_names.csv');
+
+lambdaPr = 656.28; %нм;
+speedOfLight = 299792.458; %км/с;
+
+nOds = size(spectra, 1);
+numberofstars = size(starNames, 1);
+lambdaEnd = lambdaStart + (nOds - 1) * lambdaDelta;
+lambda = (lambdaStart : lambdaDelta : lambdaEnd)';
+
+s1 = spectra(:, 1);
+s2 = spectra(:, 2);
+s3 = spectra(:, 3);
+s4 = spectra(:, 4);
+s5 = spectra(:, 5);
+s6 = spectra(:, 6);
+s7 = spectra(:, 7);
+
+
+[sHa1, idx1] = min(s1);
+lambdaHa1 = lambda(idx1);
+[sHa2, idx2] = min(s2);
+lambdaHa2 = lambda(idx2);
+[sHa3, idx3] = min(s3);
+lambdaHa3 = lambda(idx3);
+[sHa4, idx4] = min(s4);
+lambdaHa4 = lambda(idx4);
+[sHa5, idx5] = min(s5);
+lambdaHa5 = lambda(idx5);
+[sHa6, idx6] = min(s6);
+lambdaHa6 = lambda(idx6);
+[sHa7, idx7] = min(s7);
+lambdaHa7 = lambda(idx7);
+
+
+z1 = (lambdaHa1 / lambdaPr) - 1;
+z2 = (lambdaHa2 / lambdaPr) - 1;
+z3 = (lambdaHa3 / lambdaPr) - 1;
+z4 = (lambdaHa4 / lambdaPr) - 1;
+z5 = (lambdaHa5 / lambdaPr) - 1;
+z6 = (lambdaHa6 / lambdaPr) - 1;
+z7 = (lambdaHa7 / lambdaPr) - 1;
+speed1 = z1 * speedOfLight;
+speed2 = z2 * speedOfLight;
+speed3 = z3 * speedOfLight;
+speed4 = z4 * speedOfLight;
+speed5 = z5 * speedOfLight;
+speed6 = z6 * speedOfLight;
+speed7 = z7 * speedOfLight;
+speed = [speed1 speed2 speed3 speed4 speed5 speed6 speed7];
+moveaway = [starNames(1) starNames(2) starNames(3) starNames(7) ];
+fg1 = figure;
+plot(lambda, s1, 'b--', 'LineWidth', 1)
+xlabel('Длина волны, нм')
+ylabel(['Интенсивность, эрг/см^2/c/', char(197)])
+title('Спектры звезд')
+
+hold on
+grid on
+plot(lambda, s2, 'b--', 'LineWidth', 1, 'Color', [0.8 0.1 0.8])
+plot(lambda, s3, 'b--', 'LineWidth', 1, 'Color', [0.2 0.7 0.2])
+plot(lambda, s4, 'b', 'LineWidth', 3, 'Color', [0.2 0.7 0.2])
+plot(lambda, s5, 'b', 'LineWidth', 3, 'Color', [0.2 0.7 0.9])
+plot(lambda, s6, 'b', 'LineWidth', 3, 'Color', [0.9 0.5 0.2])
+plot(lambda, s7, 'b--', 'LineWidth', 1, 'Color', [0.1 0.1 0.4])
+set(fg1, 'Visible', 'on')
+legend('HD30584', 'HD10032', 'HD64191', 'HD5211', 'HD56030', 'HD94028', 'SAO102986' )
+hold off
+saveas(fg1, 'stars.png')
